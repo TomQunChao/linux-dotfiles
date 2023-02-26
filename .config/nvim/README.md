@@ -98,6 +98,10 @@ export GOPROXY=https://proxy.golang.com.cn,direct
 
 ## 安装插件
 
+```sh
+git clone https://github.com/TomQunChao/linux-dotfiles.git ~/Downloads/ && cp ~/Downloads/linux-dotfiles/.config/nvim ~/.config/nvim -r && rm ~/Downloads/linux-dotfiles ~/.config/nvim/.git -rf
+```
+
 打开Neovim，lazy会直接安装相关插件
 
 ### 安装fzf

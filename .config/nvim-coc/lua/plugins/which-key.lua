@@ -73,19 +73,17 @@ wk.setup({
   })
 local mapping1={
   c={
-    name="Code", -- https://github.com/LunarVim/LunarVim/blob/master/lua/lvim/core/which-key.lua
-    f={"<cmd>lua require('plugins.utils.format').format()<cr>","Format"},
-    s={"<cmd>Telescope lsp_dynamic_workspace_symbols<cr>","Workspace Symbol"},
-    d={"<cmd>Telescope diagnostics<cr>","All Diagnostics"},
-    D={"<cmd>Telescope diagnostics bufnr=0 theme=get_ivy<cr>","Buffer Diagnostics"},
-    n={"<cmd>lua vim.diagnostic.goto_next()<cr>","Next diagnostic"},
-    p={"<cmd>lua vim.diagnostic.goto_prev()<cr>","Prev diagnostic"},
-    r={"<cmd>lua vim.lsp.buf.rename()<cr>","Rename Symbol"},
-    -- i={":<C-u>CocFzfList issues<cr>","List issues"},
-    q={"<cmd>lua vim.diagnostic.setloclist()<cr>","Quick Fix"},
-    l={"<cmd>lua vim.lsp.codelens.run()<cr>","CodeLen"}
+    name="Code", --https://github.com/neoclide/coc.nvim
+    f={":call CocAction('format')<cr>","Format"},
+    s={":<C-u>CocFzfList symbols<cr>","Workspace Symbol"},
+    d={":<C-u>CocFzfList diagnostics<cr>","List Diagnostics"},
+    D={":<C-u>CocFzfList diagnostics --current-buf<cr>","List Current Diagnostics"},
+    n={":<C-u>CocNext<cr>","CocNext"},
+    p={":<C-u>CocPrev<cr>","CocPrev"},
+    r={"<Plug>(coc-rename)","Rename Symbol"},
+    i={":<C-u>CocFzfList issues<cr>","List issues"}
   },
-  s={"<cmd>Telescope lsp_document_symbols<cr>","Outline(Symbol)"},
+  s={":<C-u>CocFzfList outline<cr>","Outline(Symbol)"},
   b={
     name="Buffer", -- https://github.com/romgrk/barbar.nvim
     p={"<Cmd>BufferPrevious<CR>","BufferPrevious"},
@@ -98,23 +96,6 @@ local mapping1={
     w={"<Cmd>BufferOrderByWindowNumber<CR>","BufferOrderByWindowNumber"},
     i={"<Cmd>BufferPin<CR>","BufferPin"},
     c={"<Cmd>BufferClose<CR>","BufferClose"}
-  },
-  d = {
-    name = "Debug",
-    t = { "<cmd>lua require'dap'.toggle_breakpoint()<cr>", "Toggle Breakpoint" },
-    b = { "<cmd>lua require'dap'.step_back()<cr>", "Step Back" },
-    c = { "<cmd>lua require'dap'.continue()<cr>", "Continue" },
-    C = { "<cmd>lua require'dap'.run_to_cursor()<cr>", "Run To Cursor" },
-    d = { "<cmd>lua require'dap'.disconnect()<cr>", "Disconnect" },
-    g = { "<cmd>lua require'dap'.session()<cr>", "Get Session" },
-    i = { "<cmd>lua require'dap'.step_into()<cr>", "Step Into" },
-    o = { "<cmd>lua require'dap'.step_over()<cr>", "Step Over" },
-    u = { "<cmd>lua require'dap'.step_out()<cr>", "Step Out" },
-    p = { "<cmd>lua require'dap'.pause()<cr>", "Pause" },
-    r = { "<cmd>lua require'dap'.repl.toggle()<cr>", "Toggle Repl" },
-    s = { "<cmd>lua require'dap'.continue()<cr>", "Start" },
-    q = { "<cmd>lua require'dap'.close()<cr>", "Quit" },
-    U = { "<cmd>lua require'dapui'.toggle({reset = true})<cr>", "Toggle UI" },
   },
   w={
     name="Window",
@@ -141,21 +122,13 @@ local mapping1={
   },
   l={
     name="Lsp And Config",
-    i={"<cmd>LspInfo<cr>","LspInfo"}
+    c={"<cmd>CocConfig<cr>","Config"},
+    C={":<C-u>CocList commands<cr>","List Coc Commands"},
+    e={":<C-u>CocList extensions<cr>","List Coc Extensions"},
   },
-  p = {
-    name = "Plugins",
-    i = { "<cmd>PlugInstall<cr>", "Install" },
-    s = { "<cmd>PlugUpdate<cr>", "Sync" },
-    S = { "<cmd>PlugStatus<cr>", "Status" },
-    c = { "<cmd>PlugClean<cr>", "Clean" },
-    u = { "<cmd>PlugUpgrade<cr>", "Upgrade vim-plug" },
-    l = { "<cmd>PlugSnapshot<cr>", "snapshot" },
-    d = { "<cmd>PlugDiff<cr>", "diff" },
-  },
+  p={"<cmd>Lazy<cr>","Plugins"},
   t={":ToggleTerm<cr>","Terminal"},
-  h={":noh<cr>","Clear Search Highlight"},
-  k={"<cmd>Telescope keymaps<cr>","keymaps"}
+  h={":noh<cr>","Clear Search Highlight"}
 }
 local opt1={
     mode = "n", -- NORMAL mode

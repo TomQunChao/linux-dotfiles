@@ -3,9 +3,10 @@
 ## 本配置的文件结构
 
 ```sh
+├── coc-settings.json # LSP配置&COC配置
 ├── format # 格式化文件配置
 │   └── c
-├── init.vim # neovim默认配置，包括插件列表
+├── init.lua # neovim默认配置
 └── lua
     ├── core # 核心配置
     │   ├── autocmds.lua # 自动命令(TODO)
@@ -14,6 +15,7 @@
     └── plugins
         ├── coc.lua # COC快捷键配置
         ├── comment.lua # Comment插件配置
+        ├── init.lua # 插件列表和插件配置
         ├── vim-instant-markdown.lua # markdown语言支持
         └── which-key.lua # 快捷键配置和which-key插件配置
 ```
@@ -55,7 +57,7 @@ conda提供了python支持和其它运行依赖支持
 
 ```sh
 conda install conda-pack
-conda create -n nvim -y
+conda create -n nvim python=3.9 -y
 conda activate nvim
 # 安装相关依赖包，可以根据自己的需要去除某些语言包
 conda install clangdev clang gcc gxx cmake openjdk lua ruby go cython git nodejs==16.17.1 jupyter jedi-language-server jupyter ueberzug Pillow cairosvg pnglatex plotly kaleido neovim pynvim pip -c conda-forge -y
@@ -70,14 +72,6 @@ tar -xf nvim.tar.gz -C ~/.local/share/nvim/binarys/env
 ```sh
 export PATH=$PATH:~/.local/share/nvim/binarys/env/bin
 export LD_LIBRARY=~/.local/share/nvim/binarys/env/lib:$LD_LIBRARY
-```
-
-### 安装各种lsp
-
-上面使用conda安装了clangd，可以使用node安装其它lsp
-
-```sh
-
 ```
 
 ### 安装Rust(可选)
@@ -105,8 +99,6 @@ export GOPROXY=https://proxy.golang.com.cn,direct
 ## 安装插件
 
 ```sh
-sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
-       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 git clone https://github.com/TomQunChao/linux-dotfiles.git ~/Downloads/ && cp ~/Downloads/linux-dotfiles/.config/nvim ~/.config/nvim -r && rm ~/Downloads/linux-dotfiles ~/.config/nvim/.git -rf
 ```
 
@@ -128,13 +120,18 @@ git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
 
 ### [TODO]插件介绍
 
-目前在`init.vim`中有注释
+目前在`lua/plugins/init.lua`中有注释
 
-### 安装插件
+### 安装[coc.nvim](https://github.com/neoclide/coc.nvim)插件
 
 打开nvim之后，执行如下命令，可以根据自己的需要选择
 
-打开之后
+```sh
+:CocInstall coc-rust-analyzer coc-clangd coc-css coc-cmake coc-eslint coc-go coc-html coc-java coc-texlab coc-toml coc-tsserver coc-toml coc-yaml coc-xml 
+:CocInstall coc-vetur coc-python coc-docker coc-lua coc-jedi coc-json coc-sql coc-vimlsp coc-sh coc-pairs coc-git
+```
+
+实际上只有rust,c,python的language server，需要其它的可以去对应网站查看安装指南
 
 ## 导出环境和转移环境
 
@@ -162,5 +159,3 @@ echo 'export PATH=~/.local/bin/:$PATH' >> ~/.bashrc
 ## FAQ
 
 - 安装之后pip不能用：可以使用[get-pip](https://bootstrap.pypa.io/get-pip.py)重新安装pip
-
-- LVIM不补全

@@ -1,0 +1,7 @@
+/home/kali/miniconda3/envs/nvim/lib
+├── @volar/vue-language-server@1.2.0
+├── corepack@0.12.1
+├── jsonls@0.0.4
+├── npm@8.15.0
+└── vls@0.8.5
+

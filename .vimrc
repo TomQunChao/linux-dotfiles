@@ -28,6 +28,12 @@ Plug 'SirVer/ultisnips' | Plug 'honza/vim-snippets'
 Plug 'tpope/vim-commentary'|Plug 'tomtom/tcomment_vim'
 call plug#end()
 
+set termguicolors
+colorscheme material
+let g:material_theme_style='ocean'
+hi Normal guibg=NONE ctermbg=NONE
+
+
 set showtabline=1
 
 " Commenting blocks of code.
@@ -48,6 +54,11 @@ let g:lsp_inlay_hints_enabled = 1
 let g:lsp_inlay_hints_mode = {
 \  'normal': ['always'],
 \}
+
+let g:lsp_settings={
+    \	'clangd':{'cmd':['clangd']},
+    \ 	'jedi-language-server':{'cmd':['jedi-language-server']}
+}
 
 autocmd User lsp_setup call lsp#register_server({
 \   'name': 'gopls',
